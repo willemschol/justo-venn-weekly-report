@@ -1,0 +1,14 @@
+{
+  "name": "justo-venn-weekly-report",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "run": "node ./src/index.js",
+    "check": "node --check ./src/index.js"
+  },
+  "dependencies": {
+    "googleapis": "^148.0.0",
+    "sharp": "^0.34.2"
+  }
+}

@@ -1,0 +1,32 @@
+name: Weekly Venn Report
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13 * * 1"
+    - cron: "0 14 * * 1"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run weekly report
+        env:
+          JUSTO_TEAM_CLI_EMAIL: ${{ secrets.JUSTO_TEAM_CLI_EMAIL }}
+          JUSTO_TEAM_CLI_TOKEN: ${{ secrets.JUSTO_TEAM_CLI_TOKEN }}
+          JUSTO_TEAM_CLI_REFRESH_TOKEN: ${{ secrets.JUSTO_TEAM_CLI_REFRESH_TOKEN }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
+        run: npm run run
