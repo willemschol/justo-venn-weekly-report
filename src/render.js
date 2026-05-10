@@ -45,24 +45,24 @@ function vennSvg(entry) {
       <rect x="26" y="26" width="${PX - 52}" height="${PX - 52}" rx="24" fill="#ffffff"/>
     </g>
     ${flagSvg(country)}
-    <circle cx="325" cy="368" r="184" fill="rgba(99,163,255,0.12)" stroke="#0b2e63" stroke-width="2"/>
-    <circle cx="575" cy="368" r="184" fill="rgba(164,210,116,0.12)" stroke="#0b2e63" stroke-width="2"/>
-    <circle cx="450" cy="556" r="184" fill="rgba(255,198,89,0.12)" stroke="#0b2e63" stroke-width="2"/>
+    <circle cx="314" cy="372" r="198" fill="rgba(99,163,255,0.12)" stroke="#0b2e63" stroke-width="2"/>
+    <circle cx="586" cy="372" r="198" fill="rgba(164,210,116,0.12)" stroke="#0b2e63" stroke-width="2"/>
+    <circle cx="450" cy="578" r="198" fill="rgba(255,198,89,0.12)" stroke="#0b2e63" stroke-width="2"/>
 
-    <text x="228" y="233" font-family="Arial" font-size="29" fill="#061224" font-weight="700">eCommerce</text>
-    <text x="272" y="265" font-family="Arial" font-size="22" fill="#6b7b90">Total ${totals.ecommerce}</text>
-    <text x="575" y="233" font-family="Arial" font-size="28" fill="#061224" font-weight="700" text-anchor="middle">Justo Delivery</text>
-    <text x="575" y="265" font-family="Arial" font-size="22" fill="#6b7b90" text-anchor="middle">Total ${totals.delivery}</text>
-    <text x="450" y="709" font-family="Arial" font-size="29" fill="#061224" font-weight="700" text-anchor="middle">Punto de Venta</text>
-    <text x="450" y="741" font-family="Arial" font-size="22" fill="#6b7b90" text-anchor="middle">Total ${totals.pos}</text>
+    <text x="212" y="221" font-family="Arial" font-size="28" fill="#061224" font-weight="700">eCommerce</text>
+    <text x="265" y="252" font-family="Arial" font-size="20" fill="#6b7b90">Total ${totals.ecommerce}</text>
+    <text x="586" y="221" font-family="Arial" font-size="27" fill="#061224" font-weight="700" text-anchor="middle">Justo Delivery</text>
+    <text x="586" y="252" font-family="Arial" font-size="20" fill="#6b7b90" text-anchor="middle">Total ${totals.delivery}</text>
+    <text x="450" y="744" font-family="Arial" font-size="28" fill="#061224" font-weight="700" text-anchor="middle">Punto de Venta</text>
+    <text x="450" y="775" font-family="Arial" font-size="20" fill="#6b7b90" text-anchor="middle">Total ${totals.pos}</text>
 
-    <text x="214" y="406" font-family="Arial" font-size="56" fill="#061224" font-weight="700">${regions.eOnly}</text>
-    <text x="644" y="406" font-family="Arial" font-size="56" fill="#061224" font-weight="700">${regions.dOnly}</text>
-    <text x="450" y="664" font-family="Arial" font-size="56" fill="#061224" font-weight="700" text-anchor="middle">${regions.pOnly}</text>
-    <text x="450" y="366" font-family="Arial" font-size="58" fill="#061224" font-weight="700" text-anchor="middle">${regions.edOnly}</text>
-    <text x="330" y="505" font-family="Arial" font-size="50" fill="#061224" font-weight="700">${regions.epOnly}</text>
-    <text x="555" y="505" font-family="Arial" font-size="50" fill="#061224" font-weight="700">${regions.dpOnly}</text>
-    <text x="450" y="455" font-family="Arial" font-size="58" fill="#061224" font-weight="700" text-anchor="middle">${regions.all}</text>
+    <text x="192" y="414" font-family="Arial" font-size="58" fill="#061224" font-weight="700">${regions.eOnly}</text>
+    <text x="666" y="414" font-family="Arial" font-size="58" fill="#061224" font-weight="700">${regions.dOnly}</text>
+    <text x="450" y="694" font-family="Arial" font-size="58" fill="#061224" font-weight="700" text-anchor="middle">${regions.pOnly}</text>
+    <text x="450" y="364" font-family="Arial" font-size="62" fill="#061224" font-weight="700" text-anchor="middle">${regions.edOnly}</text>
+    <text x="318" y="519" font-family="Arial" font-size="52" fill="#061224" font-weight="700">${regions.epOnly}</text>
+    <text x="570" y="519" font-family="Arial" font-size="52" fill="#061224" font-weight="700">${regions.dpOnly}</text>
+    <text x="450" y="468" font-family="Arial" font-size="62" fill="#061224" font-weight="700" text-anchor="middle">${regions.all}</text>
   </svg>`;
 }
 
