@@ -70,11 +70,23 @@ export async function upsertSlideImages(imagePaths) {
     uploaded[country] = await uploadImageForSlides(drive, filePath);
   }
 
+  const presentation = await slides.presentations.get({
+    presentationId: CONFIG.presentations.id,
+  });
+  const slide = presentation.data.slides?.find(
+    (entry) => entry.objectId === CONFIG.presentations.slide26ObjectId,
+  );
+  const existingObjectIds = new Set(
+    (slide?.pageElements ?? []).map((element) => element.objectId).filter(Boolean),
+  );
+
   const requests = [];
 
   for (const [country, slot] of Object.entries(CONFIG.presentations.slots)) {
     const objectId = `weekly_${country.toLowerCase()}_venn`;
-    requests.push({ deleteObject: { objectId } });
+    if (existingObjectIds.has(objectId)) {
+      requests.push({ deleteObject: { objectId } });
+    }
     requests.push({
       createImage: {
         objectId,
@@ -97,13 +109,9 @@ export async function upsertSlideImages(imagePaths) {
     });
   }
 
-  const filtered = requests.filter(
-    (request) => !(request.deleteObject && request.deleteObject.objectId === undefined),
-  );
-
   await slides.presentations.batchUpdate({
     presentationId: CONFIG.presentations.id,
-    requestBody: { requests: filtered },
+    requestBody: { requests },
   });
 
   await Promise.all(
