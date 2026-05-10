@@ -33,12 +33,14 @@ async function uploadImageForSlides(drive, filePath) {
     requestBody: {
       name: fileName,
       mimeType: "image/png",
+      parents: [CONFIG.drive.tempFolderId],
     },
     media: {
       mimeType: "image/png",
       body: fs.createReadStream(filePath),
     },
     fields: "id",
+    supportsAllDrives: true,
   });
 
   const fileId = created.data.id;
@@ -52,6 +54,7 @@ async function uploadImageForSlides(drive, filePath) {
       role: "reader",
       type: "anyone",
     },
+    supportsAllDrives: true,
   });
 
   return {
@@ -105,7 +108,7 @@ export async function upsertSlideImages(imagePaths) {
 
   await Promise.all(
     Object.values(uploaded).map(({ fileId }) =>
-      drive.files.delete({ fileId }).catch(() => undefined),
+      drive.files.delete({ fileId, supportsAllDrives: true }).catch(() => undefined),
     ),
   );
 }

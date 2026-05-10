@@ -20,6 +20,9 @@ export const CONFIG = {
     id: "1syz8grlwGTjVfmV_Zb6JkgR2w8ZP6vHWx6gTkZI_gXc",
     historySheetName: "Historial",
   },
+  drive: {
+    tempFolderId: "0AH1yaxsvYKptUk9PVA",
+  },
 };
 
 export const COUNTRY_LABELS = {
