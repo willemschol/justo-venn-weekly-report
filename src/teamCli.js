@@ -35,7 +35,7 @@ function parseJsonLines(stdout) {
 export async function runTeamCliJson(args) {
   const { stdout } = await execFileAsync(
     NPX_COMMAND,
-    ["@getjusto/team-cli", ...args, "--format", "json"],
+    ["--no-install", "@getjusto/team-cli", ...args, "--format", "json"],
     {
       env: getTeamCliEnv(),
       maxBuffer: 64 * 1024 * 1024,

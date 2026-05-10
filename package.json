@@ -8,6 +8,7 @@
     "check": "node --check ./src/index.js"
   },
   "dependencies": {
+    "@getjusto/team-cli": "^0.0.15",
     "googleapis": "^148.0.0",
     "sharp": "^0.34.2"
   }

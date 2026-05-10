@@ -45,31 +45,29 @@ function computeRegions(sets) {
 }
 
 export async function fetchWeeklyVennDataset() {
-  const [websites, biSnapshots, orderChannels] = await Promise.all([
-    runTeamCliJson([
-      "data",
-      "queries",
-      "run",
-      CONFIG.queryIds.websites,
-      "--limit",
-      "10000",
-    ]),
-    runTeamCliJson([
-      "data",
-      "queries",
-      "run",
-      CONFIG.queryIds.biSnapshots,
-      "--limit",
-      "10000",
-    ]),
-    runTeamCliJson([
-      "data",
-      "queries",
-      "run",
-      CONFIG.queryIds.orderChannels,
-      "--limit",
-      "10000",
-    ]),
+  const websites = await runTeamCliJson([
+    "data",
+    "queries",
+    "run",
+    CONFIG.queryIds.websites,
+    "--limit",
+    "10000",
+  ]);
+  const biSnapshots = await runTeamCliJson([
+    "data",
+    "queries",
+    "run",
+    CONFIG.queryIds.biSnapshots,
+    "--limit",
+    "10000",
+  ]);
+  const orderChannels = await runTeamCliJson([
+    "data",
+    "queries",
+    "run",
+    CONFIG.queryIds.orderChannels,
+    "--limit",
+    "10000",
   ]);
 
   const brands = new Map();
