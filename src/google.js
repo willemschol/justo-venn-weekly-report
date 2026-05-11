@@ -155,3 +155,20 @@ export async function appendHistoryRows(dataset) {
     requestBody: { values },
   });
 }
+
+export async function hasHistoryRowsForDate(runDate) {
+  const { sheets } = await getClients();
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: CONFIG.spreadsheet.id,
+    range: `${CONFIG.spreadsheet.historySheetName}!A:C`,
+  });
+
+  const rows = response.data.values ?? [];
+  const matchingCountries = new Set(
+    rows
+      .filter((row) => row[0] === runDate && row[2])
+      .map((row) => row[2]),
+  );
+
+  return matchingCountries.size >= CONFIG.countries.length;
+}

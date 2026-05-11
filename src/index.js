@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchWeeklyVennDataset } from "./compute.js";
-import { upsertSlideImages, appendHistoryRows } from "./google.js";
+import { upsertSlideImages, appendHistoryRows, hasHistoryRowsForDate } from "./google.js";
 import { renderCountryImages } from "./render.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,6 +24,9 @@ function chileNow() {
 
 function shouldRunScheduledJob() {
   if (process.env.FORCE_RUN === "true") return true;
+  if (process.env.GITHUB_EVENT_NAME === "schedule") {
+    return chileNow().getDay() === 1;
+  }
   const now = chileNow();
   const day = now.getDay();
   const hour = now.getHours();
@@ -37,13 +40,19 @@ async function main() {
   }
 
   const dataset = await fetchWeeklyVennDataset();
+  const runDate = Object.values(dataset)[0].generatedAt.slice(0, 10);
+  const historyAlreadyWritten = await hasHistoryRowsForDate(runDate);
   const timestamp = new Date().toISOString().slice(0, 10);
   const outputDir = path.resolve(__dirname, "..", "artifacts", timestamp);
   await fs.mkdir(outputDir, { recursive: true });
 
   const imagePaths = await renderCountryImages(dataset, outputDir);
   await upsertSlideImages(imagePaths);
-  await appendHistoryRows(dataset);
+  if (!historyAlreadyWritten) {
+    await appendHistoryRows(dataset);
+  } else {
+    console.log(`History rows for ${runDate} already exist. Skipping duplicate append.`);
+  }
 
   console.log(
     JSON.stringify(
